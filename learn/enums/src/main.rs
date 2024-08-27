@@ -1,3 +1,6 @@
+#![allow(dead_code)] // do not warn that is never used
+#![allow(unused_variables)]
+
 use std::net::Ipv4Addr;
 use std::net::Ipv6Addr;
 
@@ -10,8 +13,8 @@ fn enum_basic() {
     fn route(_ip_kind: IpAddrKind) {}
 
     // instances of the variants
-    let _four = IpAddrKind::V4;
-    let _six = IpAddrKind::V6;
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
 
     route(IpAddrKind::V4);
     route(IpAddrKind::V6);
@@ -24,45 +27,41 @@ fn ip_definition() {
         V6,
     }
 
-    #[allow(dead_code)]
     struct IpAddr {
         kind: IpAddrKind,
         address: String,
     }
-    let _home = IpAddr {
+    let home = IpAddr {
         kind: IpAddrKind::V4,
         address: String::from("127.0.0.1"),
     };
-    let _loopback = IpAddr {
+    let loopback = IpAddr {
         kind: IpAddrKind::V6,
         address: String::from("::1"),
     };
 
     /* However, it's more concise to put data directly into each enum variant */
-    #[allow(dead_code)]
     enum IpAddr2 {
         V4(String),
         V6(String),
     }
 
-    let _home = IpAddr2::V4(String::from("127.0.0.1"));
-    let _loopback = IpAddr2::V6(String::from("::1"));
+    let home = IpAddr2::V4(String::from("127.0.0.1"));
+    let loopback = IpAddr2::V6(String::from("::1"));
 
     /* IpAddr::V4() is a function call that takes a String argument and returns
     an instance of the IpAddr type */
 
     /* We could also have different types and amounts in each variant */
-    #[allow(dead_code)]
     enum IpAddr3 {
         V4(u8, u8, u8, u8),
         V6(String),
     }
 
-    let _home = IpAddr3::V4(127, 0, 0, 1);
-    let _loopback = IpAddr3::V6(String::from("::1"));
+    let home = IpAddr3::V4(127, 0, 0, 1);
+    let loopback = IpAddr3::V6(String::from("::1"));
 
     /* But the standard library already has a difinition for IP addresses */
-    #[allow(dead_code)]
     enum IpAddr4 {
         V4(Ipv4Addr),
         V6(Ipv6Addr),
@@ -70,7 +69,6 @@ fn ip_definition() {
 }
 
 fn message() {
-    #[allow(dead_code)]
     enum Message {
         Quit,
         Move { x: i32, y: i32 },
@@ -91,14 +89,12 @@ fn message() {
 
 fn matching() {
     #[derive(Debug)]
-    #[allow(dead_code)]
     enum UsState {
         Alabama,
         Alaska,
         // --snip--
     }
 
-    #[allow(dead_code)]
     enum Coin {
         Penny,
         Nickel,
